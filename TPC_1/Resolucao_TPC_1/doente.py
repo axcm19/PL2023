@@ -8,6 +8,8 @@ class Doente:
         self.batimento = 0
         self.temDoenca = 0 # 0 se não 1 se sim
 
+    ####################################################################################################################
+
     def cria_doente(self, idade, sexo, tensao, colestrol, batimento, temDoenca):
         self.idade = idade
         self.sexo = sexo
@@ -16,12 +18,17 @@ class Doente:
         self.batimento = batimento
         self.temDoenca = temDoenca
 
+    ####################################################################################################################
+
     def __str__(self):
         # representa o doente numa string
         out = "Idade = " +self.idade+ "; Sexo = " +self.sexo+ "; Tensão = " +self.tensao+ "; Colestrol = " +self.colestrol+ "; Batimento = " +self.batimento+ "; Tem Doença (1-sim, 0-não) = " +self.temDoenca
         return out
 
+    ####################################################################################################################
+
     def imprime(self):
         # imprime o doente como uma string
         print(f"Idade = {self.idade} ; Sexo =  {self.sexo} ;  Tensão =  {self.tensao} ; Colestrol =  {self.colestrol} ; Batimento = {self.batimento} ; Tem Doença (1-sim, 0-não) =  {self.temDoenca}")
 
+    ####################################################################################################################

@@ -33,10 +33,18 @@ def main():
         elif saida == 2:
             # Calcular a distribuição da doença por escalões etários
 
+            print("")
+            print(f"Maior idade = {catalogo_doentes.maior_idade()}")
+            print(f"Menor idade = {catalogo_doentes.menor_idade()}")
+            print("")
+
+            catalogo_doentes.calcula_dist_etaria()
+
             l = input("Prima enter para continuar")
 
         elif saida == 3:
             # Calcular a distribuição da doença por níveis de colesterol
+
 
             l = input("Prima enter para continuar")
 
