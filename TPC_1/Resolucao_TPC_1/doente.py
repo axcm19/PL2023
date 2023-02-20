@@ -32,3 +32,15 @@ class Doente:
         print(f"Idade = {self.idade} ; Sexo =  {self.sexo} ;  Tensão =  {self.tensao} ; Colestrol =  {self.colestrol} ; Batimento = {self.batimento} ; Tem Doença (1-sim, 0-não) =  {self.temDoenca}")
 
     ####################################################################################################################
+
+    def nivel_colestrol(self):
+        # avalia o nivel de colestrol de um doente
+
+        colestrol = int(self.colestrol)
+
+        nivel = int(colestrol / 10)
+
+        return nivel
+
+
+    ####################################################################################################################

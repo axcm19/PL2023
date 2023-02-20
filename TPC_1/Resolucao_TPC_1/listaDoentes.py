@@ -1,3 +1,5 @@
+import math
+
 from doente import Doente
 
 class Lista_Doentes:
@@ -201,3 +203,193 @@ class Lista_Doentes:
         print(" ")
 
     ####################################################################################################################
+
+    def maior_colestrol(self):
+        maior = 0
+
+        for doente in self.lista_doentes:
+            if int(doente.colestrol) >= int(maior):
+                maior = doente.colestrol
+
+        return maior
+
+    ####################################################################################################################
+
+    def menor_colestrol(self):
+        menor = 100
+
+        for doente in self.lista_doentes:
+            if int(doente.colestrol) <= int(menor):
+                menor = doente.colestrol
+
+        return menor
+
+
+    ####################################################################################################################
+
+    def nivel_colestrol_ALT(self, colestrol):
+        # avalia o nivel de colestrol passado como argumento
+
+        nivel = int(colestrol / 10)
+
+        return nivel
+
+
+    ####################################################################################################################
+
+    def total_doentes(self):
+        # apenas devolve o total de doentes
+        return len(self.lista_doentes)
+
+
+    ####################################################################################################################
+
+    def calcula_dist_colestrol(self):
+        lim_sup = self.maior_colestrol()  # o limite superior de colestrol = 603
+        nivel_sup = self.nivel_colestrol_ALT(int(lim_sup))
+
+        # criar os os niveis de colestrol
+        niveis = [0] * (nivel_sup + 1)
+
+        for doente in self.lista_doentes:
+            nivel = int(doente.nivel_colestrol())
+
+            niveis[int(nivel)] += 1
+
+        print(" ")
+        print(f"NÍVEL DE COLESTROL ---> NÚMERO DE DOENTES")
+        print(" ")
+        for i in range(len(niveis)):
+            if(niveis[i] != 0 ):
+                print(f"Nível {i} ---> {niveis[i]}")
+
+        print(" ")
+
+    ####################################################################################################################
+
+
+    # calcula na mesma a distribuição mas imprime o resultado de forma diferente
+    def tabela_colestrol(self):
+        lim_sup = self.maior_colestrol()  # o limite superior de colestrol = 603
+        nivel_sup = self.nivel_colestrol_ALT(int(lim_sup))
+
+        # criar os os niveis de colestrol
+        niveis = [0] * (nivel_sup + 1)
+
+        for doente in self.lista_doentes:
+            nivel = int(doente.nivel_colestrol())
+
+            niveis[int(nivel)] += 1
+
+
+        
+        # "+--------------------+-------------------+")
+        # "| NÍVEL DE COLESTROL | NÚMERO DE DOENTES |")
+        # "+--------------------+-------------------+")
+        # "| 1                  | 0                 |")
+        # "| 1                  | 00                |")
+        # "| 1                  | 000               |")
+        # "+--------------------+-------------------+")
+        # "| 10                 | 0                 |")
+        # "| 10                 | 00                |")
+        # "| 10                 | 000               |")
+        # "+--------------------+-------------------+")
+        # "| 100                | 0                 |")
+        # "| 100                | 00                |")
+        # "| 100                | 000               |")
+        # "+--------------------+-------------------+")
+
+
+
+        print(" ")
+        print("+--------------------+-------------------+")
+        print("| NÍVEL DE COLESTROL | NÚMERO DE DOENTES |")
+        print("+--------------------+-------------------+")
+
+        for i in range(len(niveis)):
+            digits1 = len(str(i))
+            digits2 = len(str(niveis[i]))
+
+            if digits1 == 1 and digits2 == 1 :
+                print(f"| {i}                  | {niveis[i]}                 |")
+                print("+--------------------+-------------------+")
+
+            if digits1 == 1 and digits2 == 2:
+                print(f"| {i}                  | {niveis[i]}                |")
+                print("+--------------------+-------------------+")
+
+            if digits1 == 1 and digits2 == 3:
+                print(f"| {i}                  | {niveis[i]}               |")
+                print("+--------------------+-------------------+")
+
+            #-------------------------------------------------------------------------
+
+            if digits1 == 2 and digits2 == 1:
+                print(f"| {i}                 | {niveis[i]}                 |")
+                print("+--------------------+-------------------+")
+
+            if digits1 == 2 and digits2 == 2:
+                print(f"| {i}                 | {niveis[i]}                |")
+                print("+--------------------+-------------------+")
+
+            if digits1 == 2 and digits2 == 3:
+                print(f"| {i}                 | {niveis[i]}               |")
+                print("+--------------------+-------------------+")
+
+            #-------------------------------------------------------------------------
+
+            if digits1 == 3 and digits2 == 1:
+                print(f"| {i}                | {niveis[i]}                 |")
+                print("+--------------------+-------------------+")
+
+            if digits1 == 3 and digits2 == 2:
+                print(f"| {i}                | {niveis[i]}                |")
+                print("+--------------------+-------------------+")
+
+            if digits1 == 3 and digits2 == 3:
+                print(f"| {i}                | {niveis[i]}               |")
+                print("+--------------------+-------------------+")
+
+        print(" ")
+
+
+    ####################################################################################################################
+
+    # calcula na mesma a distribuição mas imprime o resultado de forma diferente
+    def tabela_sexo(self):
+        mascu_com_doenca = 0
+        mascu_sem_doenca = 0
+
+        fem_com_doenca = 0
+        fem_sem_doenca = 0
+
+        for doente in self.lista_doentes:
+            if doente.sexo == "M" and int(doente.temDoenca) == 1:
+                mascu_com_doenca += 1
+
+            if doente.sexo == "M" and int(doente.temDoenca) == 0:
+                mascu_sem_doenca += 1
+
+            if doente.sexo == "F" and int(doente.temDoenca) == 1:
+                fem_com_doenca += 1
+
+            if doente.sexo == "F" and int(doente.temDoenca) == 0:
+                fem_sem_doenca += 1
+
+        # "                 +------------+------------+")
+        # "                 | SEM DOENÇA | COM DOENÇA |")
+        # "+----------------+------------+------------+")
+        # "| MASCULINO      | 1          | 1          |")
+        # "+----------------+------------+------------+")
+        # "| FEMININO       | 1          | 00         |")
+        # "+----------------+------------+------------+")
+
+
+        print(" ")
+        print("                 +------------+------------+")
+        print("                 | SEM DOENÇA | COM DOENÇA |")
+        print("+----------------+------------+------------+")
+        print(f"| MASCULINO      | {mascu_sem_doenca}        | {mascu_com_doenca}        |")
+        print(f"| FEMININO       | {fem_sem_doenca}        | {fem_com_doenca}         |")
+        print("+----------------+------------+------------+")
+        print(" ")
