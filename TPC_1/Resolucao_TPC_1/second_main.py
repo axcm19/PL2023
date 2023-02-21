@@ -29,9 +29,9 @@ def main():
     catalogo_doentes.tabela_sexo()
     print(" ")
 
-    print("---> Tabela da distribuição da doença por escalões etários (falta implementar a tabela!!!)")
+    print("---> Tabela da distribuição da doença por escalões etários")
     print(" ")
-    catalogo_doentes.calcula_dist_etaria()
+    catalogo_doentes.tabela_etaria()
     print(" ")
 
     print("---> Tabela da distribuição da doença por níveis de colesterol...")

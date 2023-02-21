@@ -86,7 +86,7 @@ def main():
             if opcao == 1:
                 catalogo_doentes.tabela_sexo()
             elif opcao == 2:
-                catalogo_doentes.calcula_dist_etaria()
+                catalogo_doentes.tabela_etaria()
             elif opcao == 3:
                 catalogo_doentes.tabela_colestrol()
 
