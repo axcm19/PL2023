@@ -390,6 +390,7 @@ class Lista_Doentes:
         print("                 | SEM DOENÇA | COM DOENÇA |")
         print("+----------------+------------+------------+")
         print(f"| MASCULINO      | {mascu_sem_doenca}        | {mascu_com_doenca}        |")
+        print("+----------------+------------+------------+")
         print(f"| FEMININO       | {fem_sem_doenca}        | {fem_com_doenca}         |")
         print("+----------------+------------+------------+")
         print(" ")
