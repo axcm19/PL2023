@@ -9,6 +9,7 @@ def main():
     print("  = --> Devolve o valor da soma total")
     print("  OFF (seja uppercase ou lowercase) --> Interrompe a soma")
     print("  ON (seja uppercase ou lowercase) --> Retoma a soma")
+    print("  QUIT (input único em uppercase) --> Fecha o programa")
     print("-------------------------------------------------------------------")
     print(" ")
 
@@ -17,6 +18,9 @@ def main():
     estado = 1 # 1 -> on, 0 -> off
 
     while True:
+
+        if texto == "QUIT":
+            break
 
         for carater in texto:
             lowercase = carater.lower()
