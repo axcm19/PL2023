@@ -2,6 +2,33 @@ import csv
 import json
 import re
 
+#-----------------------------------------------------------------------------------------------------------------------
+
+def media(lista_notas):
+    soma = 0
+    quantos = 0
+    media = 0
+
+    for nota in lista_notas:
+        soma += int(nota)
+        quantos += 1
+
+    media = soma / quantos
+
+    return media
+
+#-----------------------------------------------------------------------------------------------------------------------
+
+def sum(lista_notas):
+    soma  =0
+
+    for nota in lista_notas:
+        soma = soma + int(nota)
+
+    return soma
+
+#-----------------------------------------------------------------------------------------------------------------------
+
 def csv_to_json(csv_file_path):
     try:
         json_filename = re.search(r"^[^.]*", csv_file_path).group(0)
@@ -10,14 +37,18 @@ def csv_to_json(csv_file_path):
         json = open(json_filename, "w")
         lines = csv.readlines()
         existe_notas = False
+        existe_func = False
+        func = ""
 
         # se detetar que existe um campo chamado "notas"
         if re.search(r"(Notas)", lines[0]) != None:
             existe_notas = True
 
-        numero = ""
-        nome = ""
-        curso = ""
+        # se detetar que está a ser aplicada uma função à lista de notas
+        if re.search(r"::([^,]*)", lines[0]) != None:
+            existe_func = True
+            func = re.search(r"::([^,]*)", lines[0]).group(1)
+
 
         # remover a primeira linha porque não queremos que seja escrita no ficheiro json
         lines.pop(0)
@@ -34,17 +65,48 @@ def csv_to_json(csv_file_path):
             dict["Curso"] = list[2]
 
             if existe_notas:
-                notas = []
 
-                #criar a lista de notas
-                notas = re.search(r",\b\d+(?:,\d+)*(,)?", line).group(0).split(",")
+                if existe_func:
+                    # criar a lista de notas
+                    notas = []
+                    notas = re.search(r",\b\d+(?:,\d+)*(,)?", line).group(0).split(",")
 
-                # retirar valores nulos da lista de notas
-                notas.pop(0)
-                if(notas[notas.__len__() - 1] == ''):
-                    notas.pop(notas.__len__() - 1)
+                    # retirar valores nulos da lista de notas
+                    notas.pop(0)
+                    if (notas[notas.__len__() - 1] == ''):
+                        notas.pop(notas.__len__() - 1)
 
-                dict["Notas"] = notas
+                    if(func == "sum"):
+                        res = sum(notas)
+
+                        key = "Notas_" + func
+                        dict[key] = res
+
+                    if (func == "media"):
+                        res = media(notas)
+
+                        key = "Notas_" + func
+                        dict[key] = res
+
+                # se não estiver a ser aplicada uma função à lista de notas
+                elif existe_func == False:
+
+                    #criar a lista de notas
+                    notas = []
+                    notas = re.search(r",\b\d+(?:,\d+)*(,)?", line).group(0).split(",")
+
+                    # retirar valores nulos da lista de notas
+                    notas.pop(0)
+                    if(notas[notas.__len__() - 1] == ''):
+                        notas.pop(notas.__len__() - 1)
+
+                    dict["Notas"] = notas
+
+                # se estiver a ser aplicada uma função à lista de notas
+
+
+
+
 
             json.write("\t" + dict.__str__() + "\n")
             """
@@ -60,6 +122,8 @@ def csv_to_json(csv_file_path):
 
         csv.close()
         json.close()
+
+#-----------------------------------------------------------------------------------------------------------------------
 
 def main():
 
