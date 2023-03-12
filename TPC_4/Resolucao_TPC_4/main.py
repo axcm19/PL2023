@@ -116,6 +116,7 @@ def csv_to_json(csv_file_path):
             json.write("\t\tCurso:" + dict["Curso"] + "\n")
             json.write("\t}\n")
             """
+
         json.write("]\n")
 
     finally:
