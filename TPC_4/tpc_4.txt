@@ -1,0 +1,3 @@
+Cria um programa em Python que implementa um conversor de um ficheiro CSV (Comma separated values) para o formato JSON. 
+Para se poder realizar a conversão pretendida, é importante saber que a primeira linha do CSV dado funciona como cabeçalho 
+que define o que representa cada coluna. 
