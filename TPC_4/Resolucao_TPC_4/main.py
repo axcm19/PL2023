@@ -4,6 +4,28 @@ import re
 
 #-----------------------------------------------------------------------------------------------------------------------
 
+def maior(lista_notas):
+    maior = 0
+
+    for nota in lista_notas:
+        if int(nota) > maior:
+            maior = int(nota)
+
+    return maior
+
+#-----------------------------------------------------------------------------------------------------------------------
+
+def menor(lista_notas):
+    menor = int(lista_notas[0])
+
+    for nota in lista_notas:
+        if int(nota) < menor:
+            menor = int(nota)
+
+    return menor
+
+#-----------------------------------------------------------------------------------------------------------------------
+
 def media(lista_notas):
     soma = 0
     quantos = 0
@@ -84,6 +106,18 @@ def csv_to_json(csv_file_path):
 
                     if (func == "media"):
                         res = media(notas)
+
+                        key = "Notas_" + func
+                        dict[key] = res
+
+                    if (func == "maior"):
+                        res = maior(notas)
+
+                        key = "Notas_" + func
+                        dict[key] = res
+
+                    if (func == "menor"):
+                        res = menor(notas)
 
                         key = "Notas_" + func
                         dict[key] = res
