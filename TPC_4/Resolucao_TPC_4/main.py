@@ -55,8 +55,8 @@ def csv_to_json(csv_file_path):
     try:
         json_filename = re.search(r"^[^.]*", csv_file_path).group(0)
         json_filename = json_filename + ".json"
-        csv = open(csv_file_path)
-        json = open(json_filename, "w")
+        csv = open(csv_file_path, encoding='UTF-8')
+        json = open(json_filename, "w" , encoding='UTF-8')
         lines = csv.readlines()
         existe_notas = False
         existe_func = False
@@ -82,9 +82,9 @@ def csv_to_json(csv_file_path):
             dict = {}
 
             list = line.split(",")
-            dict["Número"] = list[0]
-            dict["Nome"] = list[1]
-            dict["Curso"] = list[2]
+            dict["Número"] = list[0].strip()
+            dict["Nome"] = list[1].strip()
+            dict["Curso"] = list[2].strip()
 
             if existe_notas:
 
@@ -143,13 +143,7 @@ def csv_to_json(csv_file_path):
 
 
             json.write("\t" + dict.__str__() + "\n")
-            """
-            json.write("\t{\n")
-            json.write("\t\tNúmero:" + dict["Número"] + "\n")
-            json.write("\t\tNome:" + dict["Nome"] + "\n")
-            json.write("\t\tCurso:" + dict["Curso"] + "\n")
-            json.write("\t}\n")
-            """
+
 
         json.write("]\n")
 
@@ -162,19 +156,32 @@ def csv_to_json(csv_file_path):
 
 def main():
 
+    csv_file_path = ""
     # construção da UI
     print(" ")
     print("------------------------------ TPC 4 ------------------------------")
     print(" ")
     print("Insira qual ficheiro quer converter...")
+    print("Insira 'q' para fechar programa")
     print(" ")
     print("-------------------------------------------------------------------")
     print(" ")
 
-    csv_file_path = input('---> ')
 
+    while csv_file_path != 0:
 
-    csv_to_json(csv_file_path)
+        csv_file_path = input('---> ')
+
+        if csv_file_path == "q":
+            print("")
+            print("Saindo.......")
+            print("")
+            break
+
+        else:
+            csv_to_json(csv_file_path)
+            print("Ficheiro convertido com sucesso\n")
+
 
 
 if __name__ == "__main__":
