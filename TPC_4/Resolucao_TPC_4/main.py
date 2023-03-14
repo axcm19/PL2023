@@ -143,8 +143,8 @@ def csv_to_json(csv_file_path):
                     if (notas[notas.__len__() - 1] == ''):
                         notas.pop(notas.__len__() - 1)
 
-                    # converti a lista para string para obter o formato pedido no enunciado
-                    dict["Notas"] = notas.__str__()
+
+                    dict["Notas"] = notas
 
             list_for_json.append(dict)
 
